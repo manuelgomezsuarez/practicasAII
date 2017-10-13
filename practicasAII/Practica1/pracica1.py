@@ -7,7 +7,7 @@ Created on 13 oct. 2017
 import Tkinter as tk
 import sqlite3
 import feedparser
-from pattern.web import Link
+
 
 
 url="http://www.us.es/rss/feed/portada"
@@ -19,7 +19,7 @@ def almacenaNoticias():
     
     try:
         conn.execute('''CREATE TABLE NOTICIAS
-             (ID INT PRIMARY KEY     NOT NULL,
+             (ID INTEGER PRIMARY KEY AUTOINCREMENT,
              TITULO           TEXT    NOT NULL,
              LINK            TEXT     NOT NULL,
              FECHA        TEXT    NOT NULL);''')
@@ -33,8 +33,8 @@ def almacenaNoticias():
         titulo=str(noticia.title.encode('utf-8'))
         link=str(noticia.link.encode('utf-8'))
         fecha=str(noticia.published_parsed[2])+"/" +str(noticia.published_parsed[1])+"/" +str(noticia.published_parsed[0])
-        conn.execute("INSERT INTO NOTICIAS (ID,TITULO,LINK,FECHA) \
-           VALUES ("+str(idNoticia)+",'"+titulo+"','"+link+"' ,'"+fecha+"')");
+        conn.execute("INSERT INTO NOTICIAS (TITULO,LINK,FECHA) \
+           VALUES ('"+titulo+"','"+link+"' ,'"+fecha+"')");
         conn.commit  
         
 
