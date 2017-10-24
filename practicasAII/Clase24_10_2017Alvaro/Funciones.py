@@ -133,15 +133,13 @@ def botonMostrarListaCategoria():
         print w.get()
         cursor = conn.execute("""SELECT NOMBRE,PRECIO FROM DELICATESSIN WHERE CATEGORIA LIKE ?""",(w.get(),)) # al ser de tipo string, el ? le pone comillas simples
         imprimir_etiqueta(cursor)
-        conn.close()
+        #conn.close()
     conn = sqlite3.connect('DELICATESSIN.db')
     conn.text_factory = str
-    cursor = conn.execute("""SELECT CATEGORIA FROM DELICATESSIN""") # al ser de tipo string, el ? le pone comillas simples
+    cursor = conn.execute("""SELECT DISTINCT CATEGORIA FROM DELICATESSIN """) # el distinct es para que coja un ejemplo de cada categoria
     categorias=[]
-    for producto in cursor:
-        if(producto[0] not in categorias):
-            categorias.append(producto[0])
-    
+    for i in cursor:
+        categorias.append(i[0])
     master = Toplevel()
     w = Spinbox(master,values=(categorias))
     w.pack(side = LEFT)
