@@ -1,2 +1,2 @@
-cont = 24
-print cont
+cont=99
+print cont+3
