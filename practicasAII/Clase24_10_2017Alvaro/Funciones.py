@@ -56,25 +56,19 @@ def obtenDatosDeFichero(nombreFichero):
             producto=[0,0,0,0,0]
             linkNombrePrecio=articulo.find_all(class_=["prod_snimka","prod_name","product_preu","product_preu preu_reduit"])
             
-            #categoria,link,nombre,precioFinal,descuento
-            producto[0]=apartado.a.string
-            producto[1]=linkNombrePrecio[0].get("href")
-            producto[2]=linkNombrePrecio[1].a.string
-            #print apartado.a.string
+            producto[0]=apartado.a.string #categoria
+            producto[1]=linkNombrePrecio[0].get("href") #link al producto
+            producto[2]=linkNombrePrecio[1].a.string #nombre producto
             print linkNombrePrecio[0].get("href")
-            #print linkNombrePrecio[1].a.string
+            
             precios=linkNombrePrecio[2].text.encode("utf-8").replace("€","").replace(",",".").split()
             if len(precios)==2:
-                producto[3]=precios[1]
-                #print precios[1]
-                #print("Descuento:")
-                #print int(100-((float(precios[1])*100)/float(precios[0])))
-                producto[4]=int(100-((float(precios[1])*100)/float(precios[0])))
-                #print 
+                producto[3]=precios[1]#precio final
+                producto[4]=int(100-((float(precios[1])*100)/float(precios[0]))) #descuento
+                 
             else:
-                #print precios[0]
-                producto[3]=precios[0]
-                producto[4]=0
+                producto[3]=precios[0] #precio final
+                producto[4]=0 #descuento
             #print 
             productos.append(producto)
            
