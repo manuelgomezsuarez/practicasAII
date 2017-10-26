@@ -49,28 +49,6 @@ def obtenPaginasCategoria(urlCategoria):
     return urlPaginas    
 
 
-def crearDatabase(nombreDatabase,arrayDatos):
-    borrarDatabase(nombreDatabase)
-    conn = sqlite3.connect(nombreDatabase)    
-    print "Opened database successfully"; 
-    #creando una tabla
-    conn.execute('''CREATE TABLE CACTUS
-             (ID INTEGER PRIMARY KEY     AUTOINCREMENT,
-             CATEGORIA           TEXT    NOT NULL,
-             LINK            TEXT     NOT NULL,
-             PRECIO            TEXT    );''')
-    print "Table created successfully"; 
-    
-    #introduciendo valores
-    for i in arrayDatos:
-        conn.execute("INSERT INTO DELICATESSIN (CATEGORIA,LINK,PRECIO) \
-        VALUES (?,?,?,?,?)",(i[0],i[1],i[2]));
-    conn.commit()
-    cursor = conn.execute("SELECT COUNT(*) FROM CACTUS")
-    tkMessageBox.showinfo( "Base Datos", "Base de datos creada correctamente \nHay " + str(cursor.fetchone()[0]) + " registros") 
-    conn.close()
-    return conn
-
 
 def borrarDatabase(nombreDatabase):
     try:
